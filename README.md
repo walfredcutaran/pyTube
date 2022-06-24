@@ -9,5 +9,16 @@ Youtube Downloader (Alpha) <br>
 <br>
 Currently the application can only download the highest quality possible (720p, 30fps) highest
 
+
+Future Updates:
+  Download as Mp3 only (highest quality possible)
+  Font Resizing
+  Button Resizing
+  GUI update 
+    *thumbnail of the submitted video link
+    *layout update
+  
+  
+
 Alpha v0.5
 
