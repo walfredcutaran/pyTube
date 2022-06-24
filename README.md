@@ -14,6 +14,7 @@ Future Updates: <br>
   Download as Mp3 only (highest quality possible) <br>
   Font Resizing <br>
   Button Resizing <br>
+  Font Style Change <br>
   GUI update <br>
     *thumbnail of the submitted video link <br>
     *layout update <br>
