@@ -11,10 +11,15 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from pytube.exceptions import PytubeError, VideoUnavailable
 
+
 os.environ['SSL_CERT_FILE'] = certifi.where()
 
 
 class MyGridLayout(GridLayout):
+
+    from android.permissions import request_permissions, Permission
+    request_permissions([Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE])
+
     vid_title = StringProperty('')
     vid_views = StringProperty('')
     vid_owner = StringProperty('')
@@ -68,7 +73,7 @@ class MyGridLayout(GridLayout):
                                  content=Label(text='Please input a valid Youtube link...'),
                                  auto_dismiss=True,
                                  size_hint=(None, None),
-                                 size=(300, 200))
+                                 size=(600, 300))
             err_popup_pe.open()
 
         except VideoUnavailable:
@@ -76,7 +81,7 @@ class MyGridLayout(GridLayout):
                                  content=Label(text='The chosen video is unavailable...'),
                                  auto_dismiss=True,
                                  size_hint=(None, None),
-                                 size=(300, 200))
+                                 size=(600, 300))
             err_popup_vu.open()
 
         else:
@@ -84,7 +89,7 @@ class MyGridLayout(GridLayout):
                                 content=Label(text='Once you press download please wait for the next popup'),
                                 auto_dismiss=True,
                                 size_hint=(None, None),
-                                size=(500, 200))
+                                size=(600, 300))
             instruction.open()
 
             title = video_object.title
@@ -111,10 +116,13 @@ class MyGridLayout(GridLayout):
             self.add_widget(self.download)
 
     def download_button_event(self, instance):
+        from android.storage import primary_external_storage_path
+        dir = primary_external_storage_path()
+        download_dir_path = os.path.join(dir, 'Download')
 
         link = self.name.text
         video_object = YouTube(link, on_complete_callback=self.on_complete)
-        video_object.streams.get_highest_resolution().download()
+        video_object.streams.get_highest_resolution().download(output_path=download_dir_path)
 
         # clear input box
         self.name.text = ""
@@ -134,7 +142,4 @@ class MyApp(App):
 
 
 if __name__ == '__main__':
-    MyApp().run()
-
-
-# Alpha v0.2
+    MyApp().run()   
