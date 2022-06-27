@@ -8,12 +8,15 @@ Youtube Downloader (Alpha) <br>
 @Fix - Downloaded Video will be in the Downloads Folder (Android Device)
 <br>
 Currently the application can only download the highest quality possible (720p, 30fps) highest
+<br>
+<b>BUG</b> - first input succes, another attempt to submit a link (crashes)
 
 
 Future Updates: <br>
   Download as Mp3 only (highest quality possible) <br>
   Font Resizing <br>
   Button Resizing <br>
+  Font Style Change <br>
   GUI update <br>
     *thumbnail of the submitted video link <br>
     *layout update <br>
