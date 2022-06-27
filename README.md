@@ -11,7 +11,7 @@ Youtube Downloader (Alpha) <br>
 Currently the application can only download the highest quality possible (720p, 30fps) highest
 <br>
 <b>BUG</b> - first input succes, another attempt to submit a link (crashes) <b>(fixed)</b> <br>
-<b><BUG </b> - slow internet to no internet connection (crashes)
+<b>BUG</b> - slow internet to no internet connection (crashes)
 
 
 Future Updates: <br>
