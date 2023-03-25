@@ -153,9 +153,9 @@ Project Link: [https://github.com/walfredcutaran/pyTube](https://github.com/walf
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* []() I want to thank Pytube API and the community.
+* []() I want to thank Kivy Users Community.
+* []() I want to thank Python for Android Module for making this possible.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
