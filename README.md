@@ -48,10 +48,9 @@
 <img src="images/sc1.png" alt="Logo" width="400" height="700">
 </div>
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Here's the Graphical User Interface that comprises of the main Text Field for the YouTube Link, Download Button to progress the process of Downloading the Video and Lastly the Video Details which is still in Beta. (not yet finished)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
