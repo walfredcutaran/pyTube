@@ -185,7 +185,7 @@ Project Link: [https://github.com/walfredcutaran/pyTube](https://github.com/walf
 [Android.org]: https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white
 [Linux-url]: https://www.linux.org/
 [Linux.org]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
-[Linkedin.org] : https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[Linkedin.org]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [Linkedin-url]: https://www.linkedin.com/in/walfred-cutaran-930910220/
 
 
