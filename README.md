@@ -65,34 +65,22 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Future Updates
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+GUI Updates Including Icons, Colors and Animations. <br>
+Multithreading Support. <br>
+Additional Exception Handlings. <br>
+YouTube Video to MP3 Download. <br>
 
-### Prerequisites
+### Android Version Requirements
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Android 11 and Above Working and Above (Working and Tested). <br>
+Android 10 Below (Untested). <br>
 
-### Installation
+### Permissions Required
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+File Access Permission for Downloads. <br>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,9 +89,9 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Choose a YouTube Video you want to download. Copy the Video Link. Paste it in the given Text Box. Click Download. Basic Details are Presented. Download. <br>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please see images folder.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -149,13 +137,12 @@ Distributed under the The Unlicense. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Walfred Cutaran - [@linkedin](https://www.linkedin.com/in/walfred-cutaran-930910220/) - walfredcutaran1218@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/walfredcutaran/pyTube](https://github.com/walfredcutaran/pyTube)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -196,6 +183,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Android.org]: https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white
 [Linux-url]: https://www.linux.org/
 [Linux.org]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
+
 
 
 
