@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = pyTube (Alpha)
+title = pyTube (Beta)
 
 # (str) Package name
 package.name = myapp
@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,ttf
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -37,7 +37,7 @@ version = 0.8.3
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = android,certifi,kivy,python3,pytube
+requirements = android,certifi,kivy,kivymd==1.02,python3,pytube
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
