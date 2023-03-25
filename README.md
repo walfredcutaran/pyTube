@@ -203,7 +203,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [JQuery-url]: https://jquery.com 
 [Python-url]: https://www.python.org
 [Python.org]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
-[Pycharm.url]: https://www.jetbrains.com/pycharm/
+[Pycharm-url]: https://www.jetbrains.com/pycharm/
 [Pycharm.org]: https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white
 
 
