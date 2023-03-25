@@ -44,8 +44,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-<p style="text-align:center;"><img src="images/sc1.png" alt="Logo" width="400" height="700"></p>
+<div align="center">
+<img src="images/sc1.png" alt="Logo" width="400" height="700">
+</div>
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
