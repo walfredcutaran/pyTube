@@ -56,13 +56,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 ### Built With
 
 * [![Python][Python.org]][Python-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![Pycharm][Pycharm.org]][Pycharm-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -209,3 +203,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [JQuery-url]: https://jquery.com 
 [Python-url]: https://www.python.org
 [Python.org]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Pycharm.url]: https://www.jetbrains.com/pycharm/
+[Pycharm.org]: https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white
+
+
+
