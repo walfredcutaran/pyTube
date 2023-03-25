@@ -140,7 +140,7 @@ Distributed under the The Unlicense. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Walfred Cutaran - [![Linkedin][Linux.org]][Linux-url] - walfredcutaran1218@gmail.com
+Walfred Cutaran - [![Linkedin][Linkedin.org]][Linkedin-url] - walfredcutaran1218@gmail.com
 
 
 
