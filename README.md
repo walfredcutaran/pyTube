@@ -140,7 +140,7 @@ Distributed under the The Unlicense. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Walfred Cutaran - [![Linkedin][Linkedin.org]][Linkedin-url] - walfredcutaran1218@gmail.com
+Walfred Cutaran - [![Linkedin][Linkedin.org]][Linkedin-url] - [![Gmail][Gmail.org]][Gmail-url]
 
 
 
@@ -187,6 +187,8 @@ Project Link: [https://github.com/walfredcutaran/pyTube](https://github.com/walf
 [Linux.org]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
 [Linkedin.org]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [Linkedin-url]: https://www.linkedin.com/in/walfred-cutaran-930910220/
+[Gmail-url]: walfredcutaran1218@gmail.com
+[Gmail.org]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
 
 
 
