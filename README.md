@@ -34,10 +34,10 @@
     <img src="images/pytubeicon.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Hackerrank Solutions</h3>
+<h3 align="center">Pytube</h3>
 
   <p align="center">
-    by Walfred Cutaran
+    Developed by Walfred Cutaran
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
