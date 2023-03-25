@@ -58,6 +58,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 * [![Python][Python.org]][Python-url]
 * [![Pycharm][Pycharm.org]][Pycharm-url]
 * [![Android][Android.org]][Android-url]
+* [![Linux][Linux.org]][Linux-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -192,8 +193,9 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Pycharm-url]: https://www.jetbrains.com/pycharm/
 [Pycharm.org]: https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white
 [Android-url]: https://developer.android.com/about/versions/13?gclid=Cj0KCQjwt_qgBhDFARIsABcDjOcHAEUSUhyyAIt-b3RcXWe_YvYJ2M9im8TtdRPeziagglQg8XR_p7oaAuIKEALw_wcB&gclsrc=aw.ds
-
 [Android.org]: https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white
+[Linux-url]: https://www.linux.org/
+[Linux.org]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
 
 
 
