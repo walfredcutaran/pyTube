@@ -190,7 +190,7 @@ Project Link: [https://github.com/walfredcutaran/pyTube](https://github.com/walf
 [Linkedin-url]: https://www.linkedin.com/in/walfred-cutaran-930910220/
 [Gmail-url]: walfredcutaran1218@gmail.com
 [Gmail.org]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
-[Facebook.org]: https://img.shields.io/badge/Facebook-%231877F2.svg?style=flat&logo=Facebook&logoColor=white
+[Facebook.org]: https://img.shields.io/badge/Facebook-%231877F2.svg?style=flat-square&logo=Facebook&logoColor=white
 [Facebook-url]: https://www.facebook.com/walfredcutaran1218/
 
 
