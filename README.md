@@ -140,7 +140,7 @@ Distributed under the The Unlicense. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white) - [![Linkedin][Linkedin.org]][Linkedin-url] - [![Gmail][Gmail.org]][Gmail-url]
+![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?style=for-the-badge&logo=Facebook&logoColor=white)[https://www.facebook.com/walfredcutaran1218/] - [![Linkedin][Linkedin.org]][Linkedin-url] - [![Gmail][Gmail.org]][Gmail-url]
 
 
 
