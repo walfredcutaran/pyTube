@@ -11,6 +11,7 @@ from pytube.exceptions import PytubeError, VideoUnavailable
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDRectangleFlatButton
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from kivymd.uix.dialog import MDDialog
@@ -28,67 +29,40 @@ MDScreenManager:
     DownloadProgressScreen:
 
 <HomeScreen>
+    name: 'home'
     canvas:
         Color:
             rgba: .09, .07, .17, 1
         Rectangle:
             size: self.size
             pos: self.pos
-    name: 'home'
-    MDNavigationLayout:
-        MDScreenManager:
-            MDScreen:
-                MDTopAppBar:
-                    id: toolbar
-                    title: "PyTube"
-                    elevation: 3
-                    pos_hint: {"top": 1}
-                    md_bg_color: "#443C68"
-                    left_action_items:
-                        [['menu', lambda x: nav_drawer.set_state("open")]]
-                        
-        MDNavigationDrawer:
-            id: nav_drawer
-            radius: (0, 20, 20, 0)
-            spacing: 25
-            padding: 26, 25, 25, 16
-            MDNavigationDrawerMenu:
-                MDNavigationDrawerHeader:
-                    title: "Ferbs"
-                    title_color: "#635985"
-                    text: "Navigation Drawer"
-                    spacing:'10dp'
-                    padding: "12dp", 0, 0, "46dp"
-                MDNavigationDrawerDivider:
-                MDNavigationDrawerItem
-                    id: home_nav
-                    icon: "home"
-                    text: "Home"
-                    on_press:
-                        root.manager.current = 'home'
-                        nav_drawer.set_state("close")
-                MDNavigationDrawerItem
-                    icon: "camera"
-                    text: "Camera"
-                    selected_color: "7e37ca"
-                    on_press:
-                        root.manager.current = 'camera'
-                        nav_drawer.set_state("close")
-                MDNavigationDrawerItem
-                    icon: "format-letter-case"
-                    text: "Text Editor"
-                    selected_color: "7e37ca"
-                    on_press:
-                        root.manager.current = 'text_editor'
-                        nav_drawer.set_state("close")
-                MDNavigationDrawerDivider:
-                MDNavigationDrawerItem
-                    icon: "information"
-                    text: "Instruction"
-                    selected_color: "7e37ca"
-                    on_press:
-                        app.show_info_dialog()
-                        nav_drawer.set_state("close")
+
+    MDTopAppBar:  
+        id: toolbar
+        title: "PyTube"
+        elevation: 3
+        pos_hint: {"top": 1}
+        md_bg_color: "#443C68"
+
+        left_action_items:
+            [['menu', lambda x: nav_drawer.set_state("open")]]
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
+
+    ContentNavigationDrawer:
+
+    AsyncImage:
+        allow_stretch: True
+        keep_ratio: True
+        pos_hint:{'center_x': 0.5, 'center_y': 0.7}
+        size_hint: None, None
+        height: 350
+        width: 350
+        id: image_holder
+        source: 'images/pytubelogo.png'
+
     MDTextField:
         id: text_code
         mode: "rectangle"
@@ -107,44 +81,25 @@ MDScreenManager:
         hint_text_color_focus: "#ffffff"
         hint_text_color_normal: "#635985"
         multiline: False
-        pos_hint: {"center_x": .5, "center_y": .70}                    
-                        
-                        
+        pos_hint: {"center_x": .5, "center_y": .40}                    
+
+
     BoxLayout:
         orientation: 'vertical'
-        MDBottomAppBar:
-            md_bg_color: "#443C68"
-            MDTopAppBar:
-                icon: 'camera'
-                elevation: 0
-                mode: 'end'
-                type: 'bottom'
-                left_action_items: [["information-outline", lambda x: app.test_browser()]]
-                icon_color: .39, .35, .52, 1
-                on_action_button: root.manager.current = 'camera'
-        
+
+
         MDFloatLayout:
             MDFillRoundFlatIconButton
                 md_bg_color: "#635985"
-                font_name: "Poppins Medium 500"
+                font_name: "Poppins-Medium"
                 text: "Download"
                 font_size: 60
-                pos_hint:{'center_x': 0.5, 'center_y': 0.35}
+                pos_hint:{'center_x': 0.5, 'center_y': 0.25}
                 size_hint: 0.2, 0.1
                 on_release: 
                     app.test_input() # get yt link
-                    app.download_screen()                   
-                    root.manager.current = 'download_screen'
-                
-            MDFillRoundFlatIconButton
-                md_bg_color: "#635985"
-                font_name: "Poppins Medium 500"
-                text: "Video Info"
-                font_size: 60
-                pos_hint:{'center_x': 0.5, 'center_y': 0.2}
-                size_hint: 0.2, 0.1
-                on_release:
-                    app.test_input_2()
+                    app.download_screen()
+
 
 <DownloadScreen>
     name: 'download_screen'
@@ -154,7 +109,7 @@ MDScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-            
+
     AsyncImage:
         allow_stretch: True
         keep_ratio: True
@@ -164,24 +119,24 @@ MDScreenManager:
         width: 350
         id: image_holder
         source: 'x.png'
-            
+
     MDLabel:
         id: video_title
         adaptive_size: True
-        font_name: "Poppins Medium 500"
-        pos_hint: {"center_x": .5, "center_y": .5}
+        font_name: "Poppins-Medium"
+        pos_hint: {"center_x": 0.5, "center_y": .5}
         text: "MDLabel"
         color: (1,1,1,1)
         font_size: 20
         size_hint_x: .5
         allow_selection: True
         allow_copy: True
-    
+
     MDLabel:
         id: video_views
         adaptive_size: True
-        font_name: "Poppins Medium 500"
-        pos_hint: {"center_x": .5, "center_y": .4}
+        font_name: "Poppins-Medium"
+        pos_hint: {"center_x": 0.5, "center_y": .4}
         text: "MDLabel"
         color: (1,1,1,1)
         font_size: 20
@@ -193,8 +148,8 @@ MDScreenManager:
     MDLabel:
         id: video_owner
         adaptive_size: True
-        font_name: "Poppins Medium 500"
-        pos_hint: {"center_x": .5, "center_y": .3}
+        font_name: "Poppins-Medium"
+        pos_hint: {"center_x": 0.5, "center_y": .3}
         text: "MDLabel"
         color: (1,1,1,1)
         font_size: 20
@@ -206,8 +161,8 @@ MDScreenManager:
     MDLabel:
         id: video_length
         adaptive_size: True
-        font_name: "Poppins Medium 500"
-        pos_hint: {"center_x": .5, "center_y": .2}
+        font_name: "Poppins-Medium"
+        pos_hint: {"center_x": 0.5, "center_y": .2}
         text: "MDLabel"
         color: (1,1,1,1)
         font_size: 20
@@ -215,22 +170,22 @@ MDScreenManager:
         padding: "4dp", "4dp"
         allow_selection: True
         allow_copy: True 
-                    
+
     MDBoxLayout:
         orientation: 'horizontal'
         MDRectangleFlatIconButton
             md_bg_color: "#635985"
-            font_name: "Poppins Medium 500"
+            font_name: "Poppins-Medium"
             text: 'Back'
             text_color: "white"
             line_color: "#393053"
             font_size: 40
             size_hint: 1, .1
             on_release: root.manager.current = 'home'
-            
+
         MDRectangleFlatIconButton
             md_bg_color: "#635985"
-            font_name: "Poppins Medium 500"
+            font_name: "Poppins-Medium"
             text: 'Download'
             text_color: "white"
             line_color: "#393053"
@@ -238,10 +193,6 @@ MDScreenManager:
             size_hint: 1, .1
             on_release: app.start_download()
 
-
-<VideoInfoScreen>
-    name: 'video_info_screen'
-    
 <DownloadProgressScreen>
     name: 'download_progress_screen'
     canvas:
@@ -250,11 +201,11 @@ MDScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-        
+
     MDLabel:
         id: progress_label
         adaptive_size: True
-        font_name: "Poppins Medium 500"
+        font_name: "Poppins-Medium"
         pos_hint: {"center_x": .5, "center_y": .5}
         text: "MDLabel"
         color: (1,1,1,1)
@@ -263,17 +214,26 @@ MDScreenManager:
         padding: "4dp", "4dp"
         allow_selection: True
         allow_copy: True 
-    
-        
+
+
 '''
+
+
+class ContentNavigationDrawer(MDBoxLayout):
+    pass
+
+
 class HomeScreen(MDScreen):
     pass
+
 
 class DownloadScreen(MDScreen):
     pass
 
+
 class VideoInfoScreen(MDScreen):
     pass
+
 
 class DownloadProgressScreen(MDScreen):
     pass
@@ -291,18 +251,22 @@ class PyTube(MDApp):
     video_owner = StringProperty("")  # content in text field
     video_length = StringProperty("")  # content in text field
 
-    video_download_progress = StringProperty("") # download progress
+    video_download_progress = StringProperty("")  # download progress
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.vu_error_dialog = None
+        self.pe_error_dialog = None
+        self.pe_error_dialog_2 = None
+        self.download_complete = None
 
         # kv file init
         self.main_widget = Builder.load_string(kv)
 
-
     def download_screen(self):
         try:
-            link = self.yt_link
+            # link = self.yt_link
+            link = "https://www.youtube.com/watch?v=IMB7q6nC47k"
             video_object = YouTube(link)
 
             title = video_object.title
@@ -323,16 +287,21 @@ class PyTube(MDApp):
             self.main_widget.get_screen('download_screen').ids.video_length.text = final_length
             self.main_widget.get_screen('download_screen').ids.image_holder.source = image
 
-        except VideoUnavailable as err:
+            # if link is valid screen -> download_screen
+            self.root.current = 'download_screen'
+
+        except VideoUnavailable:
+            self.root.current = 'home'
             self.vu_error_dialog = MDDialog(
-                title=str(VideoUnavailable),
-                text=str(err),
+                title=str("Video Unavailable"),
+                text=str("Please check if the video is available."),
             ).open()
 
-        except PytubeError as err:
+        except PytubeError:
+            self.root.current = 'home'
             self.pe_error_dialog = MDDialog(
-                title=str(PytubeError),
-                text=str(err),
+                title=str("Error occurred"),
+                text=str("Please make sure the youtube link is valid."),
             ).open()
 
     # @mainthread
@@ -359,11 +328,12 @@ class PyTube(MDApp):
             """
 
         except PytubeError as err:
+            self.root.current = 'home'
             self.pe_error_dialog_2 = MDDialog(
                 title=str(PytubeError),
                 text=str(err),
             ).open()
-            self.root.current = 'home'
+
 
         else:
             # from android.storage import primary_external_storage_path
@@ -372,7 +342,8 @@ class PyTube(MDApp):
 
             # test download https://www.youtube.com/watch?v=NMThdHhrLoM
 
-            video = YouTube(link, on_progress_callback=self.on_download_progress_check, on_complete_callback=self.on_complete)
+            video = YouTube(link, on_progress_callback=self.on_download_progress_check,
+                            on_complete_callback=self.on_complete)
             global file_size
 
             file_size = video_object.streams.get_highest_resolution().filesize
@@ -410,11 +381,8 @@ class PyTube(MDApp):
         str_text = self.main_widget.get_screen('home').ids.text_code.text
         video_object = YouTube(str_text)
 
-
         print(video_object.streams.get_highest_resolution().filesize, "bytes")
         print(video_object.streams.get_highest_resolution().bitrate)
-
-
 
     def test_input(self):
         str_text = self.main_widget.get_screen('home').ids.text_code.text
@@ -431,7 +399,6 @@ class PyTube(MDApp):
 
 if __name__ == '__main__':
     PyTube().run()
-
 
 '''
 implement multi threading
