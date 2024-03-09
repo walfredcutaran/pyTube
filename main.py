@@ -37,21 +37,16 @@ MDScreenManager:
             size: self.size
             pos: self.pos
 
-    MDTopAppBar:  
+
+    MDTopAppBar:
         id: toolbar
         title: "PyTube"
-        elevation: 3
+        elevation: 4
         pos_hint: {"top": 1}
-        md_bg_color: "#443C68"
+        md_bg_color: "#635985"
+        left_action_items: [["menu", lambda x: app.callback()]]
 
-        left_action_items:
-            [['menu', lambda x: nav_drawer.set_state("open")]]
 
-    MDNavigationDrawer:
-        id: nav_drawer
-        radius: (0, 16, 16, 0)
-
-    ContentNavigationDrawer:
 
     AsyncImage:
         allow_stretch: True
@@ -87,18 +82,25 @@ MDScreenManager:
     BoxLayout:
         orientation: 'vertical'
 
-
         MDFloatLayout:
             MDFillRoundFlatIconButton
                 md_bg_color: "#635985"
                 font_name: "Poppins-Medium"
                 text: "Download"
                 font_size: 60
-                pos_hint:{'center_x': 0.5, 'center_y': 0.25}
+                pos_hint:{'center_x': 0.5, 'center_y': 0.15}
                 size_hint: 0.2, 0.1
                 on_release: 
                     app.test_input() # get yt link
                     app.download_screen()
+
+        MDBottomAppBar:
+            md_bg_color: "#635985"
+            MDTopAppBar:
+                icon: 'language-python'
+                type: 'bottom'
+                mode: 'end'
+                icon_color: "#635985"
 
 
 <DownloadScreen>
@@ -113,12 +115,12 @@ MDScreenManager:
     AsyncImage:
         allow_stretch: True
         keep_ratio: True
-        pos_hint:{'center_x': 0.5, 'center_y': 0.8}
+        pos_hint:{'center_x': 0.5, 'center_y': 0.75}
         size_hint: None, None
-        height: 350
-        width: 350
+        height: 450
+        width: 500
         id: image_holder
-        source: 'x.png'
+        source: ''
 
     MDLabel:
         id: video_title
@@ -266,10 +268,15 @@ class PyTube(MDApp):
     def download_screen(self):
         try:
             # link = self.yt_link
-            link = "https://www.youtube.com/watch?v=IMB7q6nC47k"
+            link = "https://www.youtube.com/watch?v=oW6jZa8ItBA"
             video_object = YouTube(link)
 
-            title = video_object.title
+            if len(video_object.title) >= 35:
+                new_str = video_object.title[:35] + ' ...'
+            else:
+                new_str = video_object.title
+
+            title = new_str
             views = video_object.views
             owner = video_object.author
             length = video_object.length
@@ -279,10 +286,44 @@ class PyTube(MDApp):
             image = video_object.thumbnail_url
 
             # https://www.youtube.com/watch?v=NMThdHhrLoM
-            final_length = f'{int(hours)} hour(s) {int(mins % 60)} minute(s) {int(secs % 60)} second(s)'
+
+            # views format
+            views_format = ''
+            if views > 1000000:
+                if not views % 1000000:
+                    views = views // 1000000
+                    views_format = 'M'
+                views = round(views / 1000000, 1)
+                views_format = 'M'
+            elif views < 1000000:
+                views = views / 1000
+                views_format = 'K'
+
+            # if num > 1000000:
+            #     if not num % 1000000:
+            #         return f'€{num // 1000000}M'
+            #     return f'€{round(num / 1000000, 1)}M'
+            # return f'€{num // 1000}K'
+
+            # video length format
+            if hours < 1:
+                final_length = f'{int(mins % 60)}:{int(secs % 60)}'
+            else:
+                if hours == 1:
+                    hours = int(hours)
+                if secs == 3600:
+                    secs = "00"
+                else:
+                    secs = secs % 60
+                if mins == 60:
+                    mins = "00"
+                else:
+                    mins = mins % 60
+
+                final_length = f'{str(hours)}:{str(mins)}:{str(secs)}'
 
             self.main_widget.get_screen('download_screen').ids.video_title.text = title
-            self.main_widget.get_screen('download_screen').ids.video_views.text = str(views)
+            self.main_widget.get_screen('download_screen').ids.video_views.text = str(views) + views_format
             self.main_widget.get_screen('download_screen').ids.video_owner.text = owner
             self.main_widget.get_screen('download_screen').ids.video_length.text = final_length
             self.main_widget.get_screen('download_screen').ids.image_holder.source = image
