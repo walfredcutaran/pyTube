@@ -36,7 +36,7 @@ MDScreenManager:
     name: 'home'
     canvas:
         Color:
-            rgba: .09, .07, .17, 1
+            rgba: .11, .15, .17, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -44,12 +44,10 @@ MDScreenManager:
 
     MDTopAppBar:
         id: toolbar
-        title: "PyTube"
-        elevation: 4
+        title: "Project Ice"
+        elevation: 2
         pos_hint: {"top": 1}
-        md_bg_color: "#635985"
-        left_action_items: [["menu", lambda x: app.callback()]]
-            
+        md_bg_color: "#0F4C75"
 
 
     AsyncImage:
@@ -68,17 +66,17 @@ MDScreenManager:
         font_name: "MonoLisa-Medium"
         font_size: 30
         text: app.yt_link
-        fill_color_normal: "#393053"
-        fill_color_focus: "#635985"
+        fill_color_normal: "#3282B8"
+        fill_color_focus: "#BBE1FA"
         text_color_normal: "#ffffff"
-        text_color_focus: "#ffffff"
-        line_color_normal: "#635985"
-        line_color_focus: "#ffffff"
+        text_color_focus: "#BBE1FA"
+        line_color_normal: "#3282B8"
+        line_color_focus: "#BBE1FA"
         size_hint_x: .80
         size_hint_y: .10
         hint_text: "Youtube link here..."
-        hint_text_color_focus: "#ffffff"
-        hint_text_color_normal: "#635985"
+        hint_text_color_focus: "#BBE1FA"
+        hint_text_color_normal: "#3282B8"
         multiline: False
         pos_hint: {"center_x": .5, "center_y": .40}   
         radius: [20, ]                 
@@ -89,7 +87,7 @@ MDScreenManager:
         
         MDFloatLayout:
             MDFillRoundFlatIconButton
-                md_bg_color: "#635985"
+                md_bg_color: "#3282B8"
                 font_name: "Poppins-Medium"
                 text: "Download"
                 font_size: 60
@@ -100,12 +98,15 @@ MDScreenManager:
                     app.download_screen()
                     
         MDBottomAppBar:
-            md_bg_color: "#635985"
+            md_bg_color: "#0F4C75"
             MDTopAppBar:
+                elevation: 0
                 icon: 'language-python'
                 type: 'bottom'
                 mode: 'end'
-                icon_color: "#635985"
+                icon_color: "#3282B8"
+                left_action_items: [["information", lambda x: app.test()]]
+                on_action_button: app.test()
         
    
 <DownloadScreen>
@@ -368,6 +369,8 @@ class PyTube(MDApp):
             self.vu_error_dialog = MDDialog(
                 title=str("Video Unavailable"),
                 text=str("Please check if the video is available."),
+                md_bg_color="#BBE1FA",
+                radius=[20, 20, 20, 20],
             ).open()
 
         except PytubeError:
@@ -375,6 +378,8 @@ class PyTube(MDApp):
             self.pe_error_dialog = MDDialog(
                 title=str("Error occurred"),
                 text=str("Please make sure the youtube link is valid."),
+                md_bg_color="#BBE1FA",
+                radius=[20, 20, 20, 20],
             ).open()
 
     @mainthread
@@ -397,8 +402,10 @@ class PyTube(MDApp):
         except PytubeError as err:
             self.root.current = 'home'
             self.pe_error_dialog_2 = MDDialog(
-                title=str(PytubeError),
+                title=str("Error occurred"),
                 text=str(err),
+                md_bg_color="#BBE1FA",
+                radius=[20, 20, 20, 20],
             ).open()
 
 
@@ -443,6 +450,8 @@ class PyTube(MDApp):
             self.pe_error_dialog_2 = MDDialog(
                 title=str(PytubeError),
                 text=str(err),
+                md_bg_color="#BBE1FA",
+                radius=[20, 20, 20, 20],
             ).open()
 
 
@@ -536,6 +545,9 @@ class PyTube(MDApp):
 
     def text_input(self, widget):
         self.yt_link = widget.text
+
+    def test(self):
+        print("hello world")
 
     def test_input_2(self):
         str_text = self.main_widget.get_screen('home').ids.text_code.text
