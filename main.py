@@ -8,6 +8,8 @@ from kivy.clock import Clock, mainthread
 from pytube import Stream
 from pytube import YouTube
 from pytube.exceptions import PytubeError, VideoUnavailable
+import pytube.request
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
@@ -18,6 +20,8 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
+
+pytube.request.default_range_size = 943718  # 9MB chunk size
 
 kv = '''
 #: import MDFadeSlideTransition kivymd.uix.transition.transition.MDFadeSlideTransition
@@ -45,7 +49,7 @@ MDScreenManager:
         pos_hint: {"top": 1}
         md_bg_color: "#635985"
         left_action_items: [["menu", lambda x: app.callback()]]
-
+            
 
 
     AsyncImage:
@@ -57,7 +61,7 @@ MDScreenManager:
         width: 350
         id: image_holder
         source: 'images/pytubelogo.png'
-
+        
     MDTextField:
         id: text_code
         mode: "rectangle"
@@ -76,12 +80,13 @@ MDScreenManager:
         hint_text_color_focus: "#ffffff"
         hint_text_color_normal: "#635985"
         multiline: False
-        pos_hint: {"center_x": .5, "center_y": .40}                    
-
-
+        pos_hint: {"center_x": .5, "center_y": .40}   
+        radius: [20, ]                 
+                        
+                        
     BoxLayout:
         orientation: 'vertical'
-
+        
         MDFloatLayout:
             MDFillRoundFlatIconButton
                 md_bg_color: "#635985"
@@ -93,7 +98,7 @@ MDScreenManager:
                 on_release: 
                     app.test_input() # get yt link
                     app.download_screen()
-
+                    
         MDBottomAppBar:
             md_bg_color: "#635985"
             MDTopAppBar:
@@ -101,8 +106,8 @@ MDScreenManager:
                 type: 'bottom'
                 mode: 'end'
                 icon_color: "#635985"
-
-
+        
+   
 <DownloadScreen>
     name: 'download_screen'
     canvas:
@@ -111,7 +116,7 @@ MDScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-
+            
     AsyncImage:
         allow_stretch: True
         keep_ratio: True
@@ -121,7 +126,7 @@ MDScreenManager:
         width: 500
         id: image_holder
         source: ''
-
+        
     MDLabel:
         id: video_title
         adaptive_size: True
@@ -133,7 +138,7 @@ MDScreenManager:
         size_hint_x: .5
         allow_selection: True
         allow_copy: True
-
+    
     MDLabel:
         id: video_views
         adaptive_size: True
@@ -172,23 +177,39 @@ MDScreenManager:
         padding: "4dp", "4dp"
         allow_selection: True
         allow_copy: True 
-
+                    
     MDBoxLayout:
         orientation: 'horizontal'
         MDRectangleFlatIconButton
             md_bg_color: "#635985"
             font_name: "Poppins-Medium"
             text: 'Back'
+            icon: 'arrow-left'
+            icon_color: "white"
             text_color: "white"
             line_color: "#393053"
             font_size: 40
             size_hint: 1, .1
             on_release: root.manager.current = 'home'
-
+            
         MDRectangleFlatIconButton
             md_bg_color: "#635985"
             font_name: "Poppins-Medium"
-            text: 'Download'
+            text: 'MP3'
+            icon: 'download'
+            icon_color: "white"
+            text_color: "white"
+            line_color: "#393053"
+            font_size: 40
+            size_hint: 1, .1
+            on_release: app.start_download_mp3()
+            
+        MDRectangleFlatIconButton
+            md_bg_color: "#635985"
+            font_name: "Poppins-Medium"
+            text: 'MP4'
+            icon: 'download'
+            icon_color: "white"
             text_color: "white"
             line_color: "#393053"
             font_size: 40
@@ -203,39 +224,48 @@ MDScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-
+        
     MDLabel:
         id: progress_label
         adaptive_size: True
         font_name: "Poppins-Medium"
-        pos_hint: {"center_x": .5, "center_y": .5}
-        text: "MDLabel"
+        pos_hint: {"center_x": .5, "center_y": .7}
+        text: ""
         color: (1,1,1,1)
         font_size: 60
         size_hint_x: .5
         padding: "4dp", "4dp"
         allow_selection: True
         allow_copy: True 
-
-
+        
+    MDBoxLayout:
+        orientation: 'horizontal'
+        
+        MDRectangleFlatIconButton
+            md_bg_color: "#635985"
+            font_name: "Poppins-Medium"
+            text: 'Back'
+            icon: 'arrow-left'
+            icon_color: "white"
+            text_color: "white"
+            line_color: "#393053"
+            font_size: 40
+            size_hint: 1, .1
+            on_release: root.manager.current = 'home'
+    
+        
 '''
-
 
 class ContentNavigationDrawer(MDBoxLayout):
     pass
-
-
 class HomeScreen(MDScreen):
     pass
-
 
 class DownloadScreen(MDScreen):
     pass
 
-
 class VideoInfoScreen(MDScreen):
     pass
-
 
 class DownloadProgressScreen(MDScreen):
     pass
@@ -253,7 +283,7 @@ class PyTube(MDApp):
     video_owner = StringProperty("")  # content in text field
     video_length = StringProperty("")  # content in text field
 
-    video_download_progress = StringProperty("")  # download progress
+    video_download_progress = StringProperty("") # download progress
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -267,12 +297,11 @@ class PyTube(MDApp):
 
     def download_screen(self):
         try:
-            # link = self.yt_link
-            link = "https://www.youtube.com/watch?v=oW6jZa8ItBA"
+            link = self.yt_link
             video_object = YouTube(link)
 
-            if len(video_object.title) >= 35:
-                new_str = video_object.title[:35] + ' ...'
+            if len(video_object.title) >= 33:
+                new_str = video_object.title[:33] + '...'
             else:
                 new_str = video_object.title
 
@@ -298,6 +327,9 @@ class PyTube(MDApp):
             elif views < 1000000:
                 views = views / 1000
                 views_format = 'K'
+
+
+
 
             # if num > 1000000:
             #     if not num % 1000000:
@@ -345,8 +377,46 @@ class PyTube(MDApp):
                 text=str("Please make sure the youtube link is valid."),
             ).open()
 
-    # @mainthread
+    @mainthread
     def start_download(self):
+        try:
+            link = self.yt_link
+            video_object = YouTube(link)
+            print(link)
+
+            """
+                for timeout in [1, 5, 10, 15]:
+                print("checking internet connection..")
+                socket.setdefaulttimeout(timeout)
+                host = socket.gethostbyname(name)
+                s = socket.create_connection((host, 80), 2)
+                s.close()
+                print('internet on.')
+            """
+
+        except PytubeError as err:
+            self.root.current = 'home'
+            self.pe_error_dialog_2 = MDDialog(
+                title=str(PytubeError),
+                text=str(err),
+            ).open()
+
+
+        else:
+            # from android.storage import primary_external_storage_path
+            # dir = primary_external_storage_path()
+            # download_dir_path = os.path.join(dir, 'Download')
+
+            # test download https://www.youtube.com/watch?v=NMThdHhrLoM
+
+
+            # self.root.current = 'download_progress_screen'
+            #
+            download_thread = threading.Thread(target=self.video_download)
+            download_thread.start()
+
+    @mainthread
+    def start_download_mp3(self):
         try:
             link = self.yt_link
             video_object = YouTube(link)
@@ -383,20 +453,70 @@ class PyTube(MDApp):
 
             # test download https://www.youtube.com/watch?v=NMThdHhrLoM
 
-            video = YouTube(link, on_progress_callback=self.on_download_progress_check,
-                            on_complete_callback=self.on_complete)
-            global file_size
 
-            file_size = video_object.streams.get_highest_resolution().filesize
-
-            video.streams.get_by_itag(22).download(output_path="C:/Users/Walfred Cutaran/Downloads")
             # self.root.current = 'download_progress_screen'
+            #
 
-    def on_download_progress_check(stream=None, chunk=None, file_handle=None, remaining=None):
-        # Gets the percentage of the file that has been downloaded.
-        percent = (100 * (file_size - remaining)) / file_size
-        print("{:00.0f}% downloaded".format(percent))
 
+            download_thread = threading.Thread(target=self.video_download_mp3)
+            download_thread.start()
+
+
+    def video_download(self):
+
+        # video.streams.get_by_itag(22).download(output_path="C:/Users/walfr/Downloads")
+
+        video_download_thread = threading.Thread(target=self.video_download_fire)
+        video_download_thread.start()
+
+    def video_download_fire(self):
+        self.root.current = 'download_progress_screen'
+
+        link = self.yt_link
+        video_object = YouTube(link)
+
+        video = YouTube(link, on_progress_callback=self.on_progress,
+                        on_complete_callback=self.on_complete)
+
+        global file_size
+
+        file_size = video_object.streams.get_highest_resolution().filesize
+        video.streams.get_by_itag(22).download(output_path="C:/Users/walfr/Downloads")
+
+    def video_download_mp3(self):
+        link = self.yt_link
+        video_object = YouTube(link)
+
+        global file_size_mp3
+
+        file_size_mp3 = video_object.streams.get_highest_resolution().filesize
+
+        video = YouTube(link, on_progress_callback=self.on_progress_mp3,
+                        on_complete_callback=self.on_complete)
+
+        stream = video.streams.filter(only_audio=True).first()
+        video.streams.get_audio_only().download(output_path="C:/Users/walfr/Downloads")
+
+    @mainthread
+    def on_progress(self, chunk, file_handle, bytes_remaining):
+
+        global percentage
+
+        bytes_downloaded = file_size - bytes_remaining
+        percentage = (bytes_downloaded / file_size) * 100
+
+        print(percentage)
+
+        progress_thread = threading.Thread(target=self.update_progress)
+        progress_thread.start()
+
+        # self.main_widget.get_screen('download_progress_screen').ids.progress_label.text = str(int(percentage))
+
+    #   Clock.schedule_once(lambda dt: self.main_widget.get_screen('download_progress_screen').ids.progress_label.text = f"Downloading: {str(percentage)}%")
+    def update_progress(self):
+        self.main_widget.get_screen('download_progress_screen').ids.progress_label.text = str(int(percentage))
+
+    @mainthread
     def on_complete(self, instance, file_path):
         self.download_complete = MDDialog(
             title=str("Attention!"),
@@ -407,10 +527,9 @@ class PyTube(MDApp):
         self.main_widget.get_screen('download_screen').ids.video_views.text = ""
         self.main_widget.get_screen('download_screen').ids.video_owner.text = ""
         self.main_widget.get_screen('download_screen').ids.video_length.text = ""
-        self.main_widget.get_screen('download_screen').ids.image_holder.source = "x.png"
+        self.main_widget.get_screen('download_screen').ids.image_holder.source = ""
         self.main_widget.get_screen('home').ids.text_code.text = ""
-        self.root.current = 'home'
-        # get_audio_only
+        # self.root.current = 'home'
 
     # def dialog_close(self, *args):
     #    self.error_dialog.dismiss(force=True)
@@ -437,9 +556,29 @@ class PyTube(MDApp):
 
         return self.main_widget
 
+    def on_pause(self):
+        return True
+
+    def on_resume(self):
+        self.yt_link = StringProperty("")  # content in text field
+
+        self.video_title = StringProperty("")  # content in text field
+        self.video_views = StringProperty("")  # content in text field
+        self.video_owner = StringProperty("")  # content in text field
+        self.video_length = StringProperty("")  # content in text field
+
+        self.video_download_progress = StringProperty("")  # download progress
+
+        self.main_widget.get_screen('download_screen').ids.video_title.text = ""
+        self.main_widget.get_screen('download_screen').ids.video_views.text = ""
+        self.main_widget.get_screen('download_screen').ids.video_owner.text = ""
+        self.main_widget.get_screen('download_screen').ids.video_length.text = ""
+        self.main_widget.get_screen('download_screen').ids.image_holder.source = ""  # add blank_image.png
+
 
 if __name__ == '__main__':
     PyTube().run()
+
 
 '''
 implement multi threading
