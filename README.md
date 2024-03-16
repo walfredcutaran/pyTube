@@ -70,7 +70,8 @@ Here's the Graphical User Interface that comprises of the main Text Field for th
 Python Version: <b> 3.9 </b> <br>
 Kivy Version: <b> 2.0.0 </b> <br>
 KivyMD Version: <b> 1.1.1 </b> <br>
-Buildozer Instruction: make sure to put kivymd==1.0.2 in the requirements please check here: <br> https://stackoverflow.com/questions/74212906/kivy-application-fatal-signal-11-sigsegv-code-1-segv-maperr-fault-addr-0x4
+Buildozer Instruction: make sure to put kivymd==1.0.2 in the requirements please check here: <br> https://stackoverflow.com/questions/74212906/kivy-application-fatal-signal-11-sigsegv-code-1-segv-maperr-fault-addr-0x4 <br>
+Include the font files: <b>MonoLisa Medium</b>, <b>Poppins-Medium</b> <br>
 
 ## Future Updates
 
